@@ -111,6 +111,7 @@ _DICTATION_LANGS: list[tuple[str, str]] = [
 
 #: Ordered list of (ISO-639-1 code, display name) pairs for the UI language.
 _UI_LANGS: list[tuple[str, str]] = [
+    ("es", "Español"),
     ("en", "English"),
     ("fr", "Français"),
 ]
@@ -299,7 +300,7 @@ class GeneralPage(BasePage):
         self._ui_lang_combo = StyledComboBox()
         for code, name in _UI_LANGS:
             self._ui_lang_combo.addItem(name, userData=code)
-        saved_ui_lang = ConfigManager.get("UI_LANGUAGE", "en")
+        saved_ui_lang = ConfigManager.get("UI_LANGUAGE", "es")
         self._ui_lang_combo.setCurrentIndex(
             self._index_for_code(self._ui_lang_combo, saved_ui_lang)
         )
@@ -423,7 +424,7 @@ class GeneralPage(BasePage):
         Args:
             index: Selected index in :attr:`_ui_lang_combo`.
         """
-        code = self._ui_lang_combo.itemData(index) or "en"
+        code = self._ui_lang_combo.itemData(index) or "es"
         ConfigManager.set("UI_LANGUAGE", code)
         self.language_changed.emit(code)
 
